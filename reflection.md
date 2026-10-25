@@ -4,13 +4,11 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+I identified four core classes: Owner, Pet, Task, and Scheduler. Owner stores and manages pets. Pet stores basic pet information and tasks. Task represents a scheduled activity and contains time, completion status, and recurrence information. Scheduler acts as the central controller that organizes tasks, sorts schedules, filters results, and detects conflicts.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+During implementation I added recurring task functionality directly to the Task class through the create_next_occurrence() method. This reduced complexity inside Scheduler and improved encapsulation by keeping recurrence behavior with the task it belongs to.
 
 ---
 
@@ -18,13 +16,11 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+The scheduler considers task time, task completion status, recurrence frequency, and pet ownership. Time was prioritized because generating a clear chronological schedule is the most important feature for pet care planning.
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+The conflict detector only checks whether two tasks occur at exactly the same time. It does not calculate overlapping durations. This tradeoff keeps the implementation simple while still identifying the most common scheduling conflicts.
 
 ---
 
@@ -32,13 +28,11 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+AI was used to brainstorm system architecture, generate UML diagrams, create dataclass skeletons, develop sorting algorithms, and draft unit tests. The most helpful prompts were focused questions about specific methods and class relationships.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+One AI suggestion involved creating a more complex scheduling engine using multiple inheritance. I rejected that approach because it added complexity without improving the required project functionality. I verified decisions by testing code behavior with pytest.
 
 ---
 
@@ -46,13 +40,12 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I tested task completion, task addition, sorting correctness, recurring task generation, and conflict detection. These tests cover the most important interactions in the system.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+4/5 Confidence
+The tests confirm all major functionality works correctly. Additional testing could include invalid time inputs, empty schedules, and more advanced overlapping task scenarios.
 
 ---
 
@@ -60,12 +53,12 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+The strongest part of the project was separating responsibilities between classes. The Scheduler remains focused on organization logic while Task contains task-specific behavior.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+I would implement persistent storage using JSON or SQLite so that schedules remain available after closing the application.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+I learned that AI is most effective when used as a collaborator rather than a decision maker. The human developer must still evaluate architecture decisions, verify results, and ensure the final design remains maintainable.
